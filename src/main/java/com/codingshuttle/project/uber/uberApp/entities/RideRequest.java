@@ -3,17 +3,24 @@ package com.codingshuttle.project.uber.uberApp.entities;
 import com.codingshuttle.project.uber.uberApp.entities.enums.PaymentMethod;
 import com.codingshuttle.project.uber.uberApp.entities.enums.RideRequestStatus;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.locationtech.jts.geom.Point;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+@Data
 @Entity
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(
+        indexes = {
+                @Index(name = "idx_ride_request_rider", columnList = "rider_id"),
+        }
+)
 public class RideRequest {
 
     @Id
@@ -37,4 +44,6 @@ public class RideRequest {
 
     @Enumerated(EnumType.STRING)
     private RideRequestStatus rideRequestStatus;
+
+    private double fare;
 }

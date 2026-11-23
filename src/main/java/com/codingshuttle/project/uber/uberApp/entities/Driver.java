@@ -1,13 +1,20 @@
 package com.codingshuttle.project.uber.uberApp.entities;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.locationtech.jts.geom.Point;
 
 @Entity
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(
+        indexes = {
+                @Index(name = "idx_driver_vehicle_id",columnList = "vehicleId")
+        }
+)
 public class Driver {
 
     @Id
@@ -21,6 +28,8 @@ public class Driver {
     private Double rating;
 
     private Boolean available;
+
+    private String vehicleId;
 
     @Column(columnDefinition = "Geometry(Point, 4326)")
     Point currentLocation;
