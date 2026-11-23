@@ -1,48 +1,48 @@
 # uberApp
 
-Spring Boot Uber-clone backend (Java 21, PostgreSQL/PostGIS, JWT auth).
+Spring Boot application for an Uber clone. The application uses Java 21, PostgreSQL/PostGIS, and JWT authentication.
 
 ## Configuration
 
-Secrets are **not** stored in the repository. All credentials are read from environment
-variables, with non-sensitive defaults (DB URL, mail host/port) in
-`src/main/resources/application.properties`.
+Do not store secrets in the repository.
+The application reads all credentials from environment variables.
+The file `src/main/resources/application.properties` contains non-sensitive defaults, such as the DB URL, the mail host, and the mail port.
 
 Required variables:
 
 | Variable | Description |
 | --- | --- |
-| `DB_USERNAME` | PostgreSQL username |
+| `DB_USERNAME` | PostgreSQL user name |
 | `DB_PASSWORD` | PostgreSQL password |
-| `JWT_SECRET_KEY` | JWT signing secret, at least 32 characters / 256 bits |
+| `JWT_SECRET_KEY` | Secret that signs JWTs. Use 32 characters or more (256 bits). |
 | `MAIL_USERNAME` | SMTP account address |
-| `MAIL_PASSWORD` | SMTP password or app password |
+| `MAIL_PASSWORD` | SMTP password or application password |
 
-Optional variables with defaults: `DB_URL`, `MAIL_HOST`, `MAIL_PORT`.
+Optional variables: `DB_URL`, `MAIL_HOST`, and `MAIL_PORT`. Each has a default value.
 
 ### Local setup
 
-1. Copy the template and fill in your own values:
+1. Copy the template file.
 
    ```bash
    cp .env.example .env
    ```
 
-2. Load the variables into your shell (Spring Boot does not load `.env` files by itself):
+2. Enter the required values in `.env`.
+3. Load the variables in the shell. Spring Boot does not load `.env` files.
 
    ```bash
    set -a; source .env; set +a
    ```
 
-3. Run the app:
+4. Start the application.
 
    ```bash
    ./mvnw spring-boot:run
    ```
 
-You can instead supply the same values through your IDE's run configuration, export them
-in your shell profile, or set them in your deployment platform's secret store.
-`.env` and `application-local.*` are gitignored and must never be committed.
+To supply the values in another way, use the run configuration of the IDE, the shell profile, or the secret store of the deployment platform.
 
-If a credential was ever committed or shared in plaintext, **rotate it** (change the DB
-password, regenerate the SMTP app password, and use a new JWT secret).
+List `.env` and `application-local.*` in `.gitignore`. Do not commit these files.
+
+If a credential was committed or shared in plain text, change it. Change the DB password, generate a new SMTP application password, and use a new JWT secret.
