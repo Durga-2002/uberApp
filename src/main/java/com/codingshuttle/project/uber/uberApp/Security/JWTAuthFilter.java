@@ -16,7 +16,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 
-import java.awt.desktop.SystemSleepEvent;
 import java.io.IOException;
 
 @Component
@@ -39,7 +38,7 @@ public class JWTAuthFilter extends OncePerRequestFilter {
             }
 
 
-            String token = requestTokenHeader.substring(7).trim();            System.out.println(token);
+            String token = requestTokenHeader.substring(7).trim();
             Long userId = jwtService.getUserIdFromToken(token);
 
             if(userId!=null && SecurityContextHolder.getContext().getAuthentication() == null){
